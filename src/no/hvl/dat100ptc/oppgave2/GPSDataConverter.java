@@ -4,7 +4,7 @@ import no.hvl.dat100ptc.oppgave1.GPSPoint;
 
 public class GPSDataConverter {
 
-	private static int TIME_STARTINDEX = 11; 
+//	private static int TIME_STARTINDEX = 11; Vet ikke hva denne er
 
 	public static int toSeconds(String timestr) {
 		
