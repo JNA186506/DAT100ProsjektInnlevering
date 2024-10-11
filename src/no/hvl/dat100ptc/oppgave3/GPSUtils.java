@@ -61,17 +61,17 @@ public class GPSUtils {
 
 	public static double distance(GPSPoint gpspoint1, GPSPoint gpspoint2) {
 
-		double d;
+//		double d;
 		double latitude1, longitude1, latitude2, longitude2;
 
-		latitude1 = Math.toRadians(gpspoint1.getLatitude());
+ 		latitude1 = Math.toRadians(gpspoint1.getLatitude());
 		latitude2 = Math.toRadians(gpspoint2.getLatitude());
 		
 		longitude1 = Math.toRadians(gpspoint1.getLongitude());
 		longitude2 = Math.toRadians(gpspoint2.getLongitude());
 
 		double a = compute_a(latitude1, latitude2, (latitude2 - latitude1), (longitude2 - longitude1));
-		return d = R * compute_c(a);
+ 		return R * compute_c(a);
 	}
 
 	private static double compute_a(double phi1, double phi2, double deltaphi, double deltalambda) {
@@ -86,19 +86,17 @@ public class GPSUtils {
 	public static double speed(GPSPoint gpspoint1, GPSPoint gpspoint2) {
 
 		int secs;
-		double speed;
+//		double speed;
 		
 		secs = gpspoint2.getTime() - gpspoint1.getTime();
-		return speed = distance(gpspoint1, gpspoint2) / secs;
+		return distance(gpspoint1, gpspoint2) / secs;
 		
 
 	}
 
 	public static String formatTime(int secs) {
-
-		String timestr;
 		
-		return timestr = "  " + String.format("%02d:%02d:%02d", secs / 3600, (secs / 60) % 60, secs % 60);
+		return "  " + String.format("%02d:%02d:%02d", secs / 3600, (secs / 60) % 60, secs % 60);
 		
 	}
 	
@@ -106,10 +104,7 @@ public class GPSUtils {
 
 	public static String formatDouble(double d) {
 
-		String str;
-		return str = String.format(Locale.US,"%" + TEXTWIDTH + ".2f", d);
+		return String.format(Locale.US,"%" + TEXTWIDTH + ".2f", d);
 
-		
-		
 	}
 }
