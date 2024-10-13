@@ -95,19 +95,26 @@ public class ShowRoute extends EasyGraphics {
 	}
 
 	public void replayRoute(int ybase) {
+		
+		int length = gpspoints.length;
+		int[] x = new int[length];
+		int[] y = new int[length];
 
-		setColor(0,0,255);
-		for (int i = 0; i < gpspoints.length - 1; i++) {
-			//Finner start x og y
-			int x1 = MARGIN +  (int)((gpspoints[i].getLongitude() - minlon) * xstep);
-			int y1 = ybase - (int)((gpspoints[i].getLatitude() - minlat) * ystep);
-			//Finner slutt x og y
-			int x2 = MARGIN + (int)((gpspoints[i+1].getLongitude() - minlon) * xstep);
-			int y2 = ybase - (int)((gpspoints[i+1].getLatitude() - minlat) * ystep);
-			
-			moveCircle(i,x1,y1); //Does not work, not sure what the solution is...
+
+		for (int i = 0; i < length; i++) {
+			x[i] = MARGIN +  (int)((gpspoints[i].getLongitude() - minlon) * xstep);
+			y[i] = ybase - (int)((gpspoints[i].getLatitude() - minlat) * ystep);
 		}
 		
+		setColor(0,255,0);
+		for (int i = 0; i < length; i++) {
+			fillCircle(x[i],y[i],5);
+			
+			pause(50);
+			
+			fillCircle(x[length-1],y[length-1],5);
+		}
+
 	}
 
 }
