@@ -2,13 +2,12 @@ package no.hvl.dat100ptc.oppgave6;
 
 import javax.swing.JOptionPane;
 
-import easygraphics.*;
+import easygraphics.EasyGraphics;
+import no.hvl.dat100ptc.TODO;
 import no.hvl.dat100ptc.oppgave1.GPSPoint;
-import no.hvl.dat100ptc.oppgave2.GPSData;
-import no.hvl.dat100ptc.oppgave2.GPSDataFileReader;
 import no.hvl.dat100ptc.oppgave3.GPSUtils;
 import no.hvl.dat100ptc.oppgave4.GPSComputer;
-import no.hvl.dat100ptc.TODO;
+import no.hvl.dat100ptc.oppgave5.ShowRoute;
 
 public class CycleComputer extends EasyGraphics {
 
@@ -74,9 +73,8 @@ public class CycleComputer extends EasyGraphics {
 	}
 
 	public double xstep() {
-
+		
 		throw new UnsupportedOperationException(TODO.method());
-	
 	}
 
 	public double ystep() {

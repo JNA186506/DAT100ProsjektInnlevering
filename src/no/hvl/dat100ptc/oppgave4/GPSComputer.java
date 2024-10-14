@@ -57,6 +57,40 @@ public class GPSComputer {
 
 		return elevation;
 	}
+	
+	public double[] climbs() {
+		
+		double[] climbs = new double[gpspoints.length - 1];
+		
+		for (int i = 0; i < gpspoints.length-1; i++) {
+			
+			double diff = gpspoints[i + 1].getElevation() - gpspoints[i].getElevation();
+			double distance = GPSUtils.distance(gpspoints[i], gpspoints[i + 1]);
+			
+			if (distance > 0) {
+				 climbs[i] = (diff / distance) * 100;
+			} else {
+				climbs[i] = 0;
+			}
+			System.out.println(climbs[i] + "% elevation gain");
+		}
+		return climbs;
+		
+	}
+	
+	public double maxClimb() {
+		
+		double maxClimb = 0;
+		double[] climbs = climbs();
+		
+		for (int i = 0; i < climbs.length; i++) {
+			if (climbs[i] < maxClimb) {
+				maxClimb = climbs[i];
+			}
+		}
+		
+		return maxClimb;
+	}
 
 	public int totalTime() {
 		return gpspoints[gpspoints.length - 1].getTime() - gpspoints[0].getTime();

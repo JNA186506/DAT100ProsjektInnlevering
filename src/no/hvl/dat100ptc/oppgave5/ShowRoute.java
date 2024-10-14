@@ -74,6 +74,7 @@ public class ShowRoute extends EasyGraphics {
 			int y2 = ybase - (int)((gpspoints[i+1].getLatitude() - minlat) * ystep);
 			
 			drawLine(x1,y1,x2,y2);
+			pause(10);
 		}
 		
 	}
