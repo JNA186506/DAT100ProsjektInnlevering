@@ -36,13 +36,6 @@ public class GPSComputer {
 		}
 		
 		return distance;
-		
-//		double distance = 0;
-//		GPSPoint previousPoint = gpspoints[0];
-//		for (GPSPoint currentPoint : gpspoints) {
-//			distance += GPSUtils.distance(currentPoint, previousPoint);
-//			previousPoint = currentPoint;
-//		}
 	}
 
 	public double totalElevation() {
@@ -110,26 +103,19 @@ public class GPSComputer {
 	
 	public double maxSpeed() {
 		
+		double[] speeds = speeds();
 		double maxSpeed = 0;
 		
-		for (int i = 0; i < speeds().length - 1; i++) {
-			if (speeds()[i] > maxSpeed) {
-				maxSpeed = speeds()[i];
+		for (int i = 0; i < speeds.length - 1; i++) {
+			if (speeds[i] > maxSpeed) {
+				maxSpeed = speeds[i];
 			}
 		}
 		return maxSpeed;
 	}
 
-	public double averageSpeed() { // TODO det er et eller annet galt med denne
-		
-		double[] speeds = speeds();
-		double average = 0;
-		
-		for (int i = 0; i < speeds.length; i++) {
-			average += speeds[i];
-		}
-		return average / speeds.length;
-		
+	public double averageSpeed() { // Marte hadde riktig kode
+		return totalDistance() / totalTime();
 	}
 
 
