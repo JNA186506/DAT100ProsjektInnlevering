@@ -1,9 +1,9 @@
 package no.hvl.dat100ptc.oppgave3;
 
-import static java.lang.Math.*;
+
+import java.util.Locale;
 
 import no.hvl.dat100ptc.oppgave1.GPSPoint;
-import no.hvl.dat100ptc.TODO;
 
 public class GPSUtils {
 
@@ -23,80 +23,80 @@ public class GPSUtils {
 	}
 
 	public static double findMin(double[] da) {
-
-		double min;
-
-		// TODO 
-		throw new UnsupportedOperationException(TODO.method());
+		double min = da[0];
+		
+		for (double d : da) {
+			if (d < min) {
+				min = d;
+			}
+		}
+		
+		return min;
 		
 	}
 
 	public static double[] getLatitudes(GPSPoint[] gpspoints) {
-
-		throw new UnsupportedOperationException(TODO.method());
 		
-		// TODO
+		double[] latitudes = new double[gpspoints.length];
+		
+		for (int i = 0; i < gpspoints.length; i++) {
+			latitudes[i] = gpspoints[i].getLatitude();
+		}
+		
+		return latitudes;
 	}
 
 	public static double[] getLongitudes(GPSPoint[] gpspoints) {
-
 		
-		throw new UnsupportedOperationException(TODO.method());
+		double[] longitudes = new double[gpspoints.length];
 		
-		// TODO 
-
+		for (int i = 0; i < gpspoints.length; i++) {
+			longitudes[i] = gpspoints[i].getLongitude();
+		}
+		
+		return longitudes;
 	}
 
 	private static final int R = 6371000; // jordens radius
 
 	public static double distance(GPSPoint gpspoint1, GPSPoint gpspoint2) {
 
-		double d;
+//		double d;
 		double latitude1, longitude1, latitude2, longitude2;
 
-		throw new UnsupportedOperationException(TODO.method());
-
-		// TODO 
-	}
-	
-	private static double compute_a(double phi1, double phi2, double deltaphi, double deltadelta) {
-	
-		throw new UnsupportedOperationException(TODO.method());
+ 		latitude1 = Math.toRadians(gpspoint1.getLatitude());
+		latitude2 = Math.toRadians(gpspoint2.getLatitude());
 		
-		// TODO 
+		longitude1 = Math.toRadians(gpspoint1.getLongitude());
+		longitude2 = Math.toRadians(gpspoint2.getLongitude());
 
+		double a = compute_a(latitude1, latitude2, (latitude2 - latitude1), (longitude2 - longitude1));
+ 		return R * compute_c(a);
+	}
+
+	private static double compute_a(double phi1, double phi2, double deltaphi, double deltalambda) {
+		return Math.pow((Math.sin(deltaphi)/2),2) + Math.cos(phi1) * Math.cos(phi2) * Math.pow((Math.sin(deltalambda)/2),2);
 	}
 
 	private static double compute_c(double a) {
-
-		
-		throw new UnsupportedOperationException(TODO.method());
-		
-		
-		// TODO 
-
+		return 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 	}
 
 	
 	public static double speed(GPSPoint gpspoint1, GPSPoint gpspoint2) {
 
 		int secs;
-		double speed;
+//		double speed;
 		
-		throw new UnsupportedOperationException(TODO.method());
+		secs = gpspoint2.getTime() - gpspoint1.getTime();
+		return distance(gpspoint1, gpspoint2) / secs;
 		
-		// TODO
 
 	}
 
 	public static String formatTime(int secs) {
-
-		String timestr;
-		String TIMESEP = ":";
-
-		throw new UnsupportedOperationException(TODO.method());
 		
-		// TODO 
+		return "  " + String.format("%02d:%02d:%02d", secs / 3600, (secs / 60) % 60, secs % 60);
 		
 	}
 	
@@ -104,12 +104,7 @@ public class GPSUtils {
 
 	public static String formatDouble(double d) {
 
-		String str;
+		return String.format(Locale.US,"%" + TEXTWIDTH + ".2f", d);
 
-		
-		throw new UnsupportedOperationException(TODO.method());
-		
-		// TODO
-		
 	}
 }

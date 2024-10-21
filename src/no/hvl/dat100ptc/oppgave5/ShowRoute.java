@@ -63,9 +63,19 @@ public class ShowRoute extends EasyGraphics {
 	}
 
 	public void showRouteMap(int ybase) {
-
-		// TODO 
-		throw new UnsupportedOperationException(TODO.method());
+	
+		setColor(0,255,0);
+		for (int i = 0; i < gpspoints.length - 1; i++) {
+			//Finner start x og y
+			int x1 = MARGIN +  (int)((gpspoints[i].getLongitude() - minlon) * xstep);
+			int y1 = ybase - (int)((gpspoints[i].getLatitude() - minlat) * ystep);
+			//Finner slutt x og y
+			int x2 = MARGIN + (int)((gpspoints[i+1].getLongitude() - minlon) * xstep);
+			int y2 = ybase - (int)((gpspoints[i+1].getLatitude() - minlat) * ystep);
+			
+			drawLine(x1,y1,x2,y2);
+			pause(10);
+		}
 		
 	}
 
@@ -76,16 +86,36 @@ public class ShowRoute extends EasyGraphics {
 		setColor(0,0,0);
 		setFont("Courier",12);
 		
-		// TODO
-		throw new UnsupportedOperationException(TODO.method());
+		drawString("Total time     : " + GPSUtils.formatTime(gpscomputer.totalTime()), TEXTDISTANCE, 10);
+		drawString("Total distance : " + GPSUtils.formatDouble((gpscomputer.totalDistance()/1000)) + " km", TEXTDISTANCE, 25);
+		drawString("Total elevation: " + GPSUtils.formatDouble(gpscomputer.totalElevation()) + " m", TEXTDISTANCE, 40);
+		drawString("Max speed      : " + GPSUtils.formatDouble(gpscomputer.maxSpeed() * 3.6) + " km/t", TEXTDISTANCE, 55);
+		drawString("Average speed  : " + GPSUtils.formatDouble(gpscomputer.averageSpeed() * 3.6) + " km/t", TEXTDISTANCE, 70);
+		drawString("Energy         : " + GPSUtils.formatDouble(gpscomputer.totalKcal(80)) + " kcal", TEXTDISTANCE, 85);
 		
 	}
 
 	public void replayRoute(int ybase) {
-
-		// TODO 
-		throw new UnsupportedOperationException(TODO.method());
 		
+		int length = gpspoints.length;
+		int[] x = new int[length];
+		int[] y = new int[length];
+
+
+		for (int i = 0; i < length; i++) {
+			x[i] = MARGIN +  (int)((gpspoints[i].getLongitude() - minlon) * xstep);
+			y[i] = ybase - (int)((gpspoints[i].getLatitude() - minlat) * ystep);
+		}
+		
+		setColor(0,255,0);
+		for (int i = 0; i < length; i++) {
+			fillCircle(x[i],y[i],5);
+			
+			pause(50);
+			
+			fillCircle(x[length-1],y[length-1],5);
+		}
+
 	}
 
 }
